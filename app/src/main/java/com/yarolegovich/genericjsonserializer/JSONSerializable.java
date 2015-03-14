@@ -1,11 +1,13 @@
 package com.yarolegovich.genericjsonserializer;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by Ярик on 14.03.2015.
+ * Created by yarolegovich on 14.03.2015.
  */
+
 public interface JSONSerializable {
-    JSONObject toJSON();
-    void initWithJSON(JSONObject object);
+    JSONObject toJSON() throws JSONException;
+    void initWithJSON(JSONObject object) throws JSONException;
 }

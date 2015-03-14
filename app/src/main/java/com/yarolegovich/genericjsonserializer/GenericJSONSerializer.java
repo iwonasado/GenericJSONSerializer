@@ -14,7 +14,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 
 /**
- * Created by Ярик on 14.03.2015.
+ * Created by yarolegovich on 14.03.2015.
  */
 
 public class GenericJSONSerializer<T extends JSONSerializable> {
@@ -86,7 +86,7 @@ public class GenericJSONSerializer<T extends JSONSerializable> {
         mPath = path;
     }
 
-    private static class JSONSerializableFactory<T extends JSONSerializable> {
+    private static class JSONSerializableFactory<T> {
 
         public JSONSerializableFactory(Class classInstance) {
             mClassInstance = classInstance;
