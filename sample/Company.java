@@ -10,8 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by Ярик on 15.03.2015.
+ * Created by yarolegovich on 15.03.2015.
  */
+ 
 public class Company {
 
     private static final String PATH = "dudes.json";
