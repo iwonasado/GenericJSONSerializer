@@ -1,0 +1,96 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+version = '1.0.0'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 21
+        versionCode 1
+        versionName version
+    }
+    buildTypes { }
+}
+
+def siteURL = 'https://github.com/yarolegovich/GenericJSONSerializer'
+def gitURL = 'https://github.com/yarolegovich/GenericJSONSerializer.git'
+group = "<maven group id>"
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+
+                name 'GenericJSONSerializer'
+                url siteURL
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'yarolegovich'
+                        name 'yarolegovich'
+                        email 'yarolgovich@gmail.com'
+                    }
+                }
+
+                scm {
+                    connection gitURL
+                    developerConnection gitURL
+                    url siteURL
+
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = "GenericJSONSerializer"
+        websiteUrl = siteURL
+        vcsUrl = gitURL
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
+
