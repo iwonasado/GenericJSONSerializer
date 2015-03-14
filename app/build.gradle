@@ -19,7 +19,7 @@ android {
 
 def siteURL = 'https://github.com/yarolegovich/GenericJSONSerializer'
 def gitURL = 'https://github.com/yarolegovich/GenericJSONSerializer.git'
-group = "<maven group id>"
+group = "serialization-utils"
 
 install {
     repositories.mavenInstaller {
